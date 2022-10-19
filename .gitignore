@@ -3,3 +3,4 @@
 *.bmp
 /x64
 /Release
+/.vs
