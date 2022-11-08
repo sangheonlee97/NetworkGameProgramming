@@ -12,3 +12,11 @@ WAITING_ROOM::WAITING_ROOM()
 	listen = (HANDLE)-1; // listen() 실패한 경우도 -1
 }
 
+bool WAITING_ROOM::checkReduplication(char* name)
+{
+	for (int i{}; i < 3; ++i) {
+		if (strcmp(player[i].nickname, name) == 0)
+			return false;
+	}
+	return true;
+}

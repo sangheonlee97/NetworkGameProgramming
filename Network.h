@@ -11,9 +11,9 @@ class WAITING_ROOM
 {
 public:
 	WAITING_ROOM();
+	bool checkReduplication(char* name);
 
 private:
 	PlayerInfo player[3]; // need PayerInfo
 	HANDLE listen;
-
 };
