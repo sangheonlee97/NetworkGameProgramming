@@ -150,14 +150,19 @@
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="FinalProject-2.h" />
-    <ClInclude Include="framework.h" />
+    <ClInclude Include="stdafx.h" />
     <ClInclude Include="GameFrame.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Hpbar.h" />
     <ClInclude Include="MoveObject.h" />
-    <ClInclude Include="Network.h" />
+    <ClInclude Include="Network.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Portal.h" />
@@ -180,11 +185,22 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="FinalProject-2.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="GameFrame.cpp" />
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="MoveObject.cpp" />
-    <ClCompile Include="Network.cpp" />
+    <ClCompile Include="Network.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Portal.cpp" />

@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Network.h"
 
 DWORD WINAPI WaitFiveSecAndStart(LPVOID lpParam)

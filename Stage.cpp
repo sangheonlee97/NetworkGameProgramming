@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Stage.h"
 #include "Global.h"
 #include "EffectManager.h"

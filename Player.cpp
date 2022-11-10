@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Player.h"
 #include "AnimationManager.h"
 #include "EffectManager.h"

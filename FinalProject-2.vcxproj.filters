@@ -102,7 +102,7 @@
     <ClInclude Include="targetver.h">
       <Filter>헤더 파일\Core</Filter>
     </ClInclude>
-    <ClInclude Include="framework.h">
+    <ClInclude Include="stdafx.h">
       <Filter>헤더 파일\Core</Filter>
     </ClInclude>
     <ClInclude Include="GameFrame.h">
@@ -240,6 +240,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Network.cpp">
+      <Filter>소스 파일\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
       <Filter>소스 파일\Core</Filter>
     </ClCompile>
   </ItemGroup>
