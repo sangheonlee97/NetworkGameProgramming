@@ -24,13 +24,34 @@ WAITING_ROOM::WAITING_ROOM()
 	listen = (HANDLE)-1; // listen() 실패한 경우도 -1
 }
 
+WAITING_ROOM::~WAITING_ROOM()
+{
+}
+
 bool WAITING_ROOM::checkReduplication(char* name)
 {
-	for (int i{}; i < 3; ++i) {
+	for (int i{}; i < PlayerCount; ++i) {
 		if (strcmp(player[i].nickname, name) == 0)
 			return false;
 	}
 	return true;
+}
+
+bool WAITING_ROOM::checkAllReady()
+{
+	if ()
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool WAITING_ROOM::checkJoin(HANDLE)
+{
+	return false;
 }
 
 void WAITING_ROOM::pressStart()
@@ -39,4 +60,24 @@ void WAITING_ROOM::pressStart()
 		HANDLE hthr = CreateThread(NULL, 0, WaitFiveSecAndStart, NULL, 0, NULL);
 		CloseHandle(hthr);
 	}
+}
+
+void WAITING_ROOM::pressReady(int playerNumber)
+{
+}
+
+void WAITING_ROOM::sendStart()
+{
+}
+
+void WAITING_ROOM::stringAnalysis(char*)
+{
+}
+
+void WAITING_ROOM::receiveData()
+{
+}
+
+void WAITING_ROOM::refuseEnter()
+{
 }
