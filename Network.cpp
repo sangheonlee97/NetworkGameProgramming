@@ -3,7 +3,13 @@
 
 DWORD WINAPI roomServerThread(LPVOID lpParam)
 {
-
+	/// <summary>
+	/// 서버->클라이언트
+	///	클라이언트 소켓버퍼 데이터 수신(닉네임, 입장, 레디, 레디취소 신호 등등)
+	///	입장거부 신호, 게임시작 신호 송신
+	/// </summary>
+	/// <param name="lpParam"></param>
+	/// <returns></returns>
 }
 DWORD WINAPI roomClientThread(LPVOID lpParam)
 {
@@ -142,17 +148,17 @@ void WAITING_ROOM::receiveData()
 
 }
 
-void WAITING_ROOM::refuseEnter(int playerNumber)
+void WAITING_ROOM::refuseEnter()
 {
 	/// <summary>
 	/// 입장거부 신호 송신(보내기)
 	/// </summary>
-	//int retval = send(player[playerNumber].sock, "refuse", sizeof("refuse"), 0); //거절 문자열 제대로 정하기
+	HANDLE hThread = CreateThread(NULL, 0, roomServerThread, (LPVOID)NetworkWaitInfo::REJECT, 0, NULL);
 }
 void WAITING_ROOM::sendStart()
 {
 	/// <summary>
-	/// 플레이어 정보, 오브젝트 정보를 송신하는 함수
+	/// 플레이어 정보, 오브젝트 정보를 송신(보내기)
 	/// </summary>
 }
 

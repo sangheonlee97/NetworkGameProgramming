@@ -1,5 +1,6 @@
 #pragma once
 #include "stdafx.h"
+#include "PlayerInfo.h"
 
 enum class NetworkWaitInfo {
 	NICKNAME,
@@ -13,14 +14,13 @@ class WAITING_ROOM
 public:
 	WAITING_ROOM();
 	~WAITING_ROOM(); //need msc
-	
 	bool checkReduplication(char* name);
 	bool checkAllReady(); // need msc
 	bool checkJoin(HANDLE handle); //ned ish
 	void pressStart();
 	void pressReady(int playerNumber); //need msc
 	void receiveData(); //need ihr
-	void refuseEnter(int playerNumber); //need msc
+	void refuseEnter(); //need msc
 	void sendStart(); //need ish
 	void stringAnalysis(char*); //need ihr
 	
