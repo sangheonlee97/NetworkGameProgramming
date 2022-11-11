@@ -154,6 +154,7 @@
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="FinalProject-2.h" />
+    <ClInclude Include="PlayerInfo.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="GameFrame.h" />
     <ClInclude Include="Global.h" />
@@ -189,6 +190,7 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="FinalProject-2.cpp" />
+    <ClCompile Include="PlayerInfo.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

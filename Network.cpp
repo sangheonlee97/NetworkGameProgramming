@@ -1,8 +1,39 @@
 #include "stdafx.h"
 #include "Network.h"
 
-DWORD WINAPI WaitFiveSecAndStart(LPVOID lpParam)
+DWORD WINAPI roomServerThread(LPVOID lpParam)
 {
+
+}
+DWORD WINAPI roomClientThread(LPVOID lpParam)
+{
+	/// <summary>
+	/// 클라이언트 -> 서버
+	/// 입장, 레디, 레디취소 송신 
+	/// 게임시작 신호 수신
+	/// </summary>
+	/// <returns></returns>
+
+}
+DWORD WINAPI roomDataProcessingThread(LPVOID lpParam)
+{
+	/// <summary>
+	/// 받은 네트워크 데이터를 처리하는 스레드
+	/// 클라이언트 연결 처리(닉네임, 소켓정보)
+	/// 대기실 정보 화면 출력
+	/// 게임 시작 관리
+	/// </summary>
+	/// <param name="lpParam"></param>
+	/// <returns></returns>
+
+}
+DWORD WINAPI WaitFiveSecAndStart(LPVOID lpParam) 
+{
+	/// <summary>
+	/// 게임 시작 전 5초 기다리고 시작하는 쓰레드
+	/// </summary>
+	/// <param name="lpParam"></param>
+	/// <returns></returns>
 	WAITING_ROOM* ppNetInfo = (WAITING_ROOM*)lpParam;
 	Sleep(5000);
 	if (ppNetInfo->checkAllReady() == true) {
@@ -10,9 +41,17 @@ DWORD WINAPI WaitFiveSecAndStart(LPVOID lpParam)
 	}
 }
 
+//*************************************THREAD*************************************//
+
 WAITING_ROOM::WAITING_ROOM()
 {
-	for (int i{}; i < 3; ++i) {
+	/// <summary>
+	/// 대기실 클래스를 만드는 함수
+	/// </summary>
+	/// <param name="lpParam"></param>
+	/// <returns></returns>
+	for (int i{}; i < playerCount; ++i) 
+	{
 		player[i].nickname[0] = "\0";
 		player[i].isReady = false;
 		player[i].sock = NULL; // CreateThread() 실패한 경우도 NULL
@@ -26,11 +65,25 @@ WAITING_ROOM::WAITING_ROOM()
 
 WAITING_ROOM::~WAITING_ROOM()
 {
+	/// <summary>
+	/// 대기실 사용을 멈출 때 불러짐 정상적으로 연결을 모두 종료하고 핸들을 닫아주는 내용을 포함
+	/// </summary>
+	for (int i{}; i < playerCount; ++i) 
+	{
+		closesocket(player[i].sock); 
+		//추가예정
+	}
+	
 }
 
 bool WAITING_ROOM::checkReduplication(char* name)
 {
-	for (int i{}; i < PlayerCount; ++i) {
+	/// <summary>
+	/// 닉네임 중복 체크
+	/// </summary>
+	/// <param name="name"></param>
+	/// <returns>없는 닉네임 일 때 true 중복시 false</returns>
+	for (int i{}; i < playerCount; ++i) {
 		if (strcmp(player[i].nickname, name) == 0)
 			return false;
 	}
@@ -39,23 +92,34 @@ bool WAITING_ROOM::checkReduplication(char* name)
 
 bool WAITING_ROOM::checkAllReady()
 {
-	if ()
+	/// <summary>
+	/// 클라이언트들의 isReady 여부 
+	/// </summary>
+	/// <returns>체크 모든 클라이언트가 Ready면 true 아니면 false</returns>
+	for (int i = 0; i < playerCount; ++i)
 	{
-		return true;
+		if (player[i].isReady == false)
+			return false;
 	}
-	else
-	{
-		return false;
-	}
+	return true;
+
 }
 
-bool WAITING_ROOM::checkJoin(HANDLE)
+bool WAITING_ROOM::checkJoin(HANDLE handle)
 {
+	/// <summary>
+	/// 정상적인 접속시도인지 검사
+	/// </summary>
+	/// <param name="">접속하려는 클라이언트의 핸들값</param>
+	/// <returns>닉네임 중복 시 false 반환 그 외 경우는 접속처리 후 true 반환</returns>
 	return false;
 }
 
 void WAITING_ROOM::pressStart()
 {
+	/// <summary>
+	/// 방장이 게임 시작 시도
+	/// </summary>
 	if (this->checkAllReady() == true) {
 		HANDLE hthr = CreateThread(NULL, 0, WaitFiveSecAndStart, NULL, 0, NULL);
 		CloseHandle(hthr);
@@ -64,20 +128,38 @@ void WAITING_ROOM::pressStart()
 
 void WAITING_ROOM::pressReady(int playerNumber)
 {
-}
-
-void WAITING_ROOM::sendStart()
-{
-}
-
-void WAITING_ROOM::stringAnalysis(char*)
-{
+	/// <summary>
+	/// 클라이언트가 ready 
+	/// ready 버튼 누를 때마다 isReady에 true, false값 전환
+	/// </summary>
+	/// <param name="playerNumber">플레이어 식별번호</param>
+	player[playerNumber].isReady = player[playerNumber].isReady ? false : true; //true면 false, false면 true 변환.
+	HANDLE hThread = CreateThread(NULL, 0, roomServerThread, NULL, 0, NULL);
 }
 
 void WAITING_ROOM::receiveData()
 {
+
 }
 
-void WAITING_ROOM::refuseEnter()
+void WAITING_ROOM::refuseEnter(int playerNumber)
 {
+	/// <summary>
+	/// 입장거부 신호 송신(보내기)
+	/// </summary>
+	//int retval = send(player[playerNumber].sock, "refuse", sizeof("refuse"), 0); //거절 문자열 제대로 정하기
+}
+void WAITING_ROOM::sendStart()
+{
+	/// <summary>
+	/// 플레이어 정보, 오브젝트 정보를 송신하는 함수
+	/// </summary>
+}
+
+void WAITING_ROOM::stringAnalysis(char*)
+{
+	/// <summary>
+	/// 받은 문자열 구문을 분석하여 목적에 맞는 함수 실행
+	/// </summary>
+	/// <param name="">해석할 문자열</param>
 }

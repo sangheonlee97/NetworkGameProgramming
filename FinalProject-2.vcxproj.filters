@@ -82,6 +82,12 @@
     <Filter Include="소스 파일\Object\Player">
       <UniqueIdentifier>{92eab713-5bd7-4741-8a45-412dc43c4661}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Core\Network">
+      <UniqueIdentifier>{e4f2d681-492b-4494-ac8a-55491b0eab3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Core\Network">
+      <UniqueIdentifier>{3c8c9c0a-e462-42ac-bb4c-808773f7ae3e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FinalProject-2.h">
@@ -169,7 +175,10 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Network.h">
-      <Filter>헤더 파일\Core</Filter>
+      <Filter>헤더 파일\Core\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerInfo.h">
+      <Filter>헤더 파일\Core\Network</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -239,11 +248,14 @@
     <ClCompile Include="Button.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Network.cpp">
-      <Filter>소스 파일\Core</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>소스 파일\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Network.cpp">
+      <Filter>소스 파일\Core\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerInfo.cpp">
+      <Filter>소스 파일\Core\Network</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
