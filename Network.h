@@ -16,14 +16,14 @@ public:
 	~WAITING_ROOM(); //need msc
 	bool checkReduplication(char* name);
 	bool checkAllReady(); // need msc
-	bool checkJoin(HANDLE handle); //ned ish
+	bool checkJoin(HANDLE handle); //need msc
 	void pressStart();
 	void pressReady(int playerNumber); //need msc
 	void receiveData(); //need ihr
 	void refuseEnter(); //need msc
 	void sendStart(); //need ish
 	void stringAnalysis(char*); //need ihr
-	
+
 private:
 	int playerCount; //대기방 안의 플레이어 수
 	PlayerInfo player[3]; // need PayerInfo
