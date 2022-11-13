@@ -27,6 +27,6 @@ public:
 private:
 	int playerCount; //대기방 안의 플레이어 수
 	PlayerInfo player[3]; // need PayerInfo
-	HANDLE listen;
-	HANDLE sock[3]; // need to talk
+	SOCKET listen;
+	SOCKET sock[3]; // need to talk
 };

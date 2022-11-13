@@ -63,10 +63,10 @@ WAITING_ROOM::WAITING_ROOM()
 		player[i].sock = NULL; // CreateThread() 실패한 경우도 NULL
 		player[i].num = 0; // 0 - 플레이어 슬롯 비어있음
 
-		sock[i] = (HANDLE)-1; // accept() 실패한 경우도 -1
+		sock[i] = (SOCKET)-1; // accept() 실패한 경우도 -1
 	}
 
-	listen = (HANDLE)-1; // listen() 실패한 경우도 -1
+	listen = (SOCKET)-1; // listen() 실패한 경우도 -1
 }
 
 WAITING_ROOM::~WAITING_ROOM()
@@ -147,7 +147,6 @@ void WAITING_ROOM::pressReady(int playerNumber)
 	/// </summary>
 	/// <param name="playerNumber">플레이어 식별번호</param>
 	player[playerNumber].isReady = player[playerNumber].isReady ? false : true; //true면 false, false면 true 변환.
-	HANDLE hThread = CreateThread(NULL, 0, roomServerThread, NULL, 0, NULL); //레디 신호 보내기
 }
 
 void WAITING_ROOM::receiveData()
@@ -160,7 +159,6 @@ void WAITING_ROOM::refuseEnter()
 	/// <summary>
 	/// 입장거부 신호 송신(보내기)
 	/// </summary>
-	HANDLE hThread = CreateThread(NULL, 0, roomServerThread, (LPVOID)NetworkWaitInfo::REJECT, 0, NULL);
 }
 void WAITING_ROOM::sendStart()
 {
