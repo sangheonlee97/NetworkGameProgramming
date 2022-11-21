@@ -25,7 +25,7 @@ public:
 	void stringAnalysis(char*); //need ihr
 
 private:
-	int playerCount; //대기방 안의 플레이어 수
+	int playerCount{ 0 }; //대기방 안의 플레이어 수
 	PlayerInfo player[3]; // need PayerInfo
 	SOCKET listen;
 	SOCKET sock[3]; // need to talk

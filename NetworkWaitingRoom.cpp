@@ -10,6 +10,7 @@ DWORD WINAPI roomServerThread(LPVOID lpParam)
 	/// </summary>
 	/// <param name="lpParam"></param>
 	/// <returns></returns>
+
 }
 DWORD WINAPI roomClientThread(LPVOID lpParam)
 {
@@ -19,7 +20,12 @@ DWORD WINAPI roomClientThread(LPVOID lpParam)
 	/// 게임시작 신호 수신
 	/// </summary>
 	/// <returns></returns>
-
+	int retval; //보내기 리턴 값
+	SOCKET server_sock = (SOCKET)lpParam; //서버 소켓 값
+	while (1)
+	{
+		retval = send(server_sock, (char*)&len, sizeof(int), 0);
+	}
 }
 DWORD WINAPI roomDataProcessingThread(LPVOID lpParam)
 {
