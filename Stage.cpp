@@ -91,6 +91,10 @@ int Stage::GetStageNum() const {
 }
 
 void Stage::SetStageNum(int num) {
+	/// <summary>
+	/// 스테이지 설정
+	/// </summary>
+	/// <param name="num">설정할 스테이지 번호</param>
 	m_stageNum = num;
 }
 
@@ -476,6 +480,9 @@ void Stage::CollisionCheck(float deltaTime) {
 }
 
 void Stage::DeleteDeadObject() {
+	/// <summary>
+	/// 죽은 오브젝트 삭제
+	/// </summary>
 	if (m_player) {
 		if (!m_player->IsAlive() or m_player->Diying()) {
 			PlayerDead();
@@ -483,6 +490,7 @@ void Stage::DeleteDeadObject() {
 	}
 
 	if (m_boss) {
+		//보스가 죽었으면 4스테이지로 이동
 		if (!m_boss->IsAlive()) {
 			SetStage(4);
 		}

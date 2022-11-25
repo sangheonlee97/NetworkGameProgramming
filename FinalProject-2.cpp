@@ -57,6 +57,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // 기본 메시지 루프입니다:
     while (true) {
         if (msg.message == WM_QUIT) {
+            //종료하면 저장하고 종료
             TextureManager::GetInst()->Save();
             break;
         }

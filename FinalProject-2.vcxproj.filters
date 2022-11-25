@@ -174,11 +174,26 @@
     <ClInclude Include="Button.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Network.h">
-      <Filter>헤더 파일\Core\Network</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerInfo.h">
       <Filter>헤더 파일\Core\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="WaitingServer.h">
+      <Filter>헤더 파일\Core\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="WaitingClient.h">
+      <Filter>헤더 파일\Core\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="IngameServer.h">
+      <Filter>헤더 파일\Core\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="IngameClient.h">
+      <Filter>헤더 파일\Core\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>헤더 파일\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiChoiceMenu.h">
+      <Filter>헤더 파일\Stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -251,10 +266,19 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>소스 파일\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Network.cpp">
+    <ClCompile Include="PlayerInfo.cpp">
       <Filter>소스 파일\Core\Network</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerInfo.cpp">
+    <ClCompile Include="WaitingServer.cpp">
+      <Filter>소스 파일\Core\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="WaitingClient.cpp">
+      <Filter>소스 파일\Core\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="IngameServer.cpp">
+      <Filter>소스 파일\Core\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="IngameClient.cpp">
       <Filter>소스 파일\Core\Network</Filter>
     </ClCompile>
   </ItemGroup>

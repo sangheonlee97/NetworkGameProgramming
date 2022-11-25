@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Network.h"
+#include "WaitingServer.h"
 
 DWORD WINAPI roomServerThread(LPVOID lpParam)
 {
@@ -24,7 +24,7 @@ DWORD WINAPI roomClientThread(LPVOID lpParam)
 	SOCKET server_sock = (SOCKET)lpParam; //서버 소켓 값
 	while (1)
 	{
-		retval = send(server_sock, (char*)&len, sizeof(int), 0);
+
 	}
 }
 DWORD WINAPI roomDataProcessingThread(LPVOID lpParam)
@@ -46,7 +46,7 @@ DWORD WINAPI WaitFiveSecAndStart(LPVOID lpParam)
 	/// </summary>
 	/// <param name="lpParam"></param>
 	/// <returns></returns>
-	WAITING_ROOM* ppNetInfo = (WAITING_ROOM*)lpParam;
+	WATING_SERVER* ppNetInfo = (WATING_SERVER*)lpParam;
 	Sleep(5000);
 	if (ppNetInfo->checkAllReady() == true) {
 		ppNetInfo->sendStart();
@@ -55,7 +55,7 @@ DWORD WINAPI WaitFiveSecAndStart(LPVOID lpParam)
 
 //*************************************THREAD*************************************//
 
-WAITING_ROOM::WAITING_ROOM()
+WATING_SERVER::WATING_SERVER()
 {
 	/// <summary>
 	/// 대기실 클래스를 만드는 함수
@@ -64,31 +64,31 @@ WAITING_ROOM::WAITING_ROOM()
 	/// <returns></returns>
 	for (int i{}; i < playerCount; ++i)
 	{
-		strcpy(player[i].nickname, "\0");
-		player[i].isReady = false;
-		player[i].sock = NULL; // CreateThread() 실패한 경우도 NULL
-		player[i].num = 0; // 0 - 플레이어 슬롯 비어있음
+		strcpy(player[i].GetNick(), "\0");
+		player[i].SetIsReady(false);
+		player[i].SetSock(NULL); // CreateThread() 실패한 경우도 NULL
+		player[i].SetNum(0); // 0 - 플레이어 슬롯 비어있음
 
-		sock[i] = (SOCKET)-1; // accept() 실패한 경우도 -1
+		//sock[i] = (SOCKET)-1; // accept() 실패한 경우도 -1
 	}
 
 	listen = (SOCKET)-1; // listen() 실패한 경우도 -1
 }
 
-WAITING_ROOM::~WAITING_ROOM()
+WATING_SERVER::~WATING_SERVER()
 {
 	/// <summary>
 	/// 대기실 사용을 멈출 때 불러짐 정상적으로 연결을 모두 종료하고 핸들을 닫아주는 내용을 포함
 	/// </summary>
 	for (int i{}; i < playerCount; ++i)
 	{
-		closesocket(player[i].sock);
+		closesocket(player[i].GetSock());
 		//추가예정
 	}
 
 }
 
-bool WAITING_ROOM::checkReduplication(char* name)
+bool WATING_SERVER::checkReduplication(char* name)
 {
 	/// <summary>
 	/// 닉네임 중복 체크
@@ -96,13 +96,13 @@ bool WAITING_ROOM::checkReduplication(char* name)
 	/// <param name="name"></param>
 	/// <returns>없는 닉네임 일 때 true 중복시 false</returns>
 	for (int i{}; i < playerCount; ++i) {
-		if (strcmp(player[i].nickname, name) == 0)
+		if (strcmp(player[i].GetNick(), name) == 0)
 			return false;
 	}
 	return true;
 }
 
-bool WAITING_ROOM::checkAllReady()
+bool WATING_SERVER::checkAllReady()
 {
 	/// <summary>
 	/// 클라이언트들의 isReady 여부 
@@ -110,14 +110,14 @@ bool WAITING_ROOM::checkAllReady()
 	/// <returns>체크 모든 클라이언트가 Ready면 true 아니면 false</returns>
 	for (int i = 0; i < playerCount; ++i)
 	{
-		if (player[i].isReady == false)
+		if (player[i].GetIsReady() == false)
 			return false;
 	}
 	return true;
 
 }
 
-bool WAITING_ROOM::checkJoin(HANDLE handle)
+bool WATING_SERVER::checkJoin(HANDLE handle)
 {
 	/// <summary>
 	/// 정상적인 접속시도인지 검사
@@ -126,7 +126,7 @@ bool WAITING_ROOM::checkJoin(HANDLE handle)
 	/// <returns>닉네임 중복 시 false 반환 그 외 경우는 접속처리 후 true 반환</returns>
 	for (int i = 0; i < playerCount; ++i)
 	{
-		if (strcmp(player[i].nickname, (char*)handle) == 0)
+		if (strcmp(player[i].GetNick(), (char*)handle) == 0)
 		{
 			return false;
 		}
@@ -134,7 +134,7 @@ bool WAITING_ROOM::checkJoin(HANDLE handle)
 	return true;
 }
 
-void WAITING_ROOM::pressStart()
+void WATING_SERVER::pressStart()
 {
 	/// <summary>
 	/// 방장이 게임 시작 시도
@@ -145,35 +145,44 @@ void WAITING_ROOM::pressStart()
 	}
 }
 
-void WAITING_ROOM::pressReady(int playerNumber)
+void WATING_SERVER::receiveReady(int playerNumber)
 {
 	/// <summary>
 	/// 클라이언트가 ready 
 	/// ready 버튼 누를 때마다 isReady에 true, false값 전환
 	/// </summary>
 	/// <param name="playerNumber">플레이어 식별번호</param>
-	player[playerNumber].isReady = player[playerNumber].isReady ? false : true; //true면 false, false면 true 변환.
+	player[playerNumber].SetIsReady(player[playerNumber].GetIsReady() ? false : true); //true면 false, false면 true 변환.
 }
 
-void WAITING_ROOM::receiveData()
+void WATING_SERVER::sendData()
 {
-
 }
 
-void WAITING_ROOM::refuseEnter()
+void WATING_SERVER::receiveData()
+{
+	/// <summary>
+	/// 
+	/// 클라이언트 소켓버퍼 데이터 송신(NetworkWaitInfo)
+	/// </summary>
+}
+
+void WATING_SERVER::refuseEnter(SOCKET consock)
 {
 	/// <summary>
 	/// 입장거부 신호 송신(보내기)
 	/// </summary>
+	int retval = send(consock, "RJ", sizeof("RJ"), 0);
 }
-void WAITING_ROOM::sendStart()
+void WATING_SERVER::sendStart()
 {
 	/// <summary>
 	/// 플레이어 정보, 오브젝트 정보를 송신(보내기)
 	/// </summary>
+	//int retval = send(player[playerNum].GetSock(), "RJ", sizeof("RJ"), 0);
 }
 
-void WAITING_ROOM::stringAnalysis(char*)
+void WATING_SERVER::stringAnalysis(char*)
 {
 	/// <summary>
 	/// 받은 문자열 구문을 분석하여 목적에 맞는 함수 실행
