@@ -19,6 +19,7 @@ public:
 	void Render(); //[서버, 클라이언트] 게임 화면 출력
 	void sendEnd(); //[서버] 게임 종료 신호 송신
 	void stringAnalysis(char*); //받은 문자열 구문을 분석하여 목적에 맞는 함수 실행
+	PlayerInfo getPlayer(int num);
 private:
 	int playerCount{ 0 }; //대기방 안의 클라이언트 플레이어 수
 	PlayerInfo player[3];
