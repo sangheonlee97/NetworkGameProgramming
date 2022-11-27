@@ -11,6 +11,7 @@ public:
 	void SetIsReady(bool ready);
 	SOCKET GetSock();
 	void SetSock(SOCKET sock);
+	void CloseSock();
 	int GetNum();
 	void SetNum(int num); 
 private:

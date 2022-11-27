@@ -12,21 +12,7 @@ DWORD WINAPI roomServerThread(LPVOID lpParam)
 	/// <returns></returns>
 
 }
-DWORD WINAPI roomClientThread(LPVOID lpParam)
-{
-	/// <summary>
-	/// 클라이언트 -> 서버
-	/// 입장, 레디, 레디취소 송신 
-	/// 게임시작 신호 수신
-	/// </summary>
-	/// <returns></returns>
-	int retval; //보내기 리턴 값
-	SOCKET server_sock = (SOCKET)lpParam; //서버 소켓 값
-	while (1)
-	{
 
-	}
-}
 DWORD WINAPI roomDataProcessingThread(LPVOID lpParam)
 {
 	/// <summary>
@@ -82,8 +68,7 @@ WATING_SERVER::~WATING_SERVER()
 	/// </summary>
 	for (int i{}; i < playerCount; ++i)
 	{
-		closesocket(player[i].GetSock());
-		//추가예정
+		player[i].CloseSock();
 	}
 
 }

@@ -40,6 +40,14 @@ void PlayerInfo::SetSock(SOCKET sock)
 	playerSock = sock;
 }
 
+void PlayerInfo::CloseSock()
+{ 
+	/// <summary>
+	/// ╪рдо ╢щ╠Б
+	/// </summary>
+	closesocket(playerSock);
+}
+
 int PlayerInfo::GetNum()
 {
 	return playerNum;

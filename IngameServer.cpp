@@ -28,9 +28,22 @@ void INGAME_SERVER::Render()
 
 void INGAME_SERVER::sendEnd()
 {
+	/// <summary>
+	/// 게임 종료 신호 송신
+	/// </summary>
+	int retval;
+	for (int i = 0; i < playerCount; ++i)
+	{
+		retval = send(player[i].GetSock(), "END", sizeof("END"), 0);
+		if (retval == SOCKET_ERROR) {
+			printf("서버에서 게임종료신호 송신 오류");
+			break;
+		}
+	}
+	
 }
-
 
 void INGAME_SERVER::stringAnalysis(char*)
 {
+
 }
