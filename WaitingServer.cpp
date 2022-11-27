@@ -180,6 +180,15 @@ void WATING_SERVER::sendStart()
 	/// 플레이어 정보, 오브젝트 정보를 송신(보내기)
 	/// </summary>
 	//int retval = send(player[playerNum].GetSock(), "RJ", sizeof("RJ"), 0);
+	int retval;
+	for (int i = 0; i < playerCount; ++i)
+	{
+		retval = send(player[i].GetSock(), "ST", sizeof("ST"), 0);
+		if (retval == SOCKET_ERROR) {
+			printf("서버에서 게임시작 신호 송신 오류");
+			break;
+		}
+	}
 }
 
 void WATING_SERVER::stringAnalysis(char* command)
