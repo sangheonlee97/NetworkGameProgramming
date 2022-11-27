@@ -53,6 +53,10 @@ void WATING_CLIENT::sendReady()
 	char readyBuf[bufSize] = "RD";
 	sprintf(readyBuf, "RD%d", myNumber); //RD+내 번호 ->RD0, RD1, ...
 	int retval = send(serverSock, readyBuf, sizeof(readyBuf), 0);
+	if (retval == SOCKET_ERROR) {
+		// 실패시 소켓 닫기
+		return;
+	}
 }
 void WATING_CLIENT::receiveReady(int playerNumber)
 {
@@ -66,6 +70,9 @@ void WATING_CLIENT::receiveReady(int playerNumber)
 
 void WATING_CLIENT::receiveStart()
 {
+	/// <summary>
+	/// 인게임 시작 메시지 받을시 함수. 게임 시작
+	/// </summary>
 }
 
 void WATING_CLIENT::stringAnalysis(char* command)
