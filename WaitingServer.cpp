@@ -1,7 +1,18 @@
 #include "stdafx.h"
 #include "WaitingServer.h"
 
-DWORD WINAPI roomServerThread(LPVOID lpParam)
+DWORD WINAPI roomServerReceiveThread(LPVOID lpParam)
+{
+	/// <summary>
+	/// 서버->클라이언트
+	///	클라이언트 소켓버퍼 데이터 수신(닉네임, 입장, 레디, 레디취소 신호 등등)
+	///	입장거부 신호, 게임시작 신호 송신
+	/// </summary>
+	/// <param name="lpParam"></param>
+	/// <returns></returns>
+
+}
+DWORD WINAPI roomServerSendThread(LPVOID lpParam)
 {
 	/// <summary>
 	/// 서버->클라이언트
@@ -158,6 +169,10 @@ void WATING_SERVER::refuseEnter(SOCKET consock)
 	/// 입장거부 신호 송신(보내기)
 	/// </summary>
 	int retval = send(consock, "RJ", sizeof("RJ"), 0);
+	if (retval == SOCKET_ERROR) {
+		// 실패시 소켓 닫기
+		return;
+	}
 }
 void WATING_SERVER::sendStart()
 {

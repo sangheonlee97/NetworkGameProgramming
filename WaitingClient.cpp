@@ -49,6 +49,10 @@ DWORD WINAPI roomClientSendThread(LPVOID lpParam)
 }
 void WATING_CLIENT::sendReady()
 {
+#define bufSize 16
+	char readyBuf[bufSize] = "RD";
+	sprintf(readyBuf, "RD%d", myNumber); //RD+³» ¹øÈ£ ->RD0, RD1, ...
+	int retval = send(serverSock, readyBuf, sizeof(readyBuf), 0);
 }
 void WATING_CLIENT::receiveReady(int playerNumber)
 {
