@@ -75,6 +75,30 @@ void WATING_CLIENT::receiveStart()
 	/// </summary>
 }
 
+void WATING_CLIENT::sendData() // 구조체 정보 송신
+{
+	int retval;
+	char buf[50];
+	char* data_for_send[4];
+	data_for_send[0] = player[myNumber].GetNick();
+	data_for_send[1] = (char*)player[myNumber].GetIsReady();
+	data_for_send[2] = (char*)player[myNumber].GetNum();
+	data_for_send[3] = (char*)player[myNumber].GetSock();
+	int len;
+	for (int i{}; i < 4; ++i)
+	{
+		len = (int)strlen(data_for_send[i]);
+		strncpy(buf, data_for_send[i], len);
+
+
+		retval = send(serverSock, buf, len, 0);
+		if (retval == SOCKET_ERROR) {
+			printf("WaitingClient, sendData 오류\n");
+			return;
+		}
+	}
+}
+
 void WATING_CLIENT::stringAnalysis(char* command)
 {
 	/// <summary>
