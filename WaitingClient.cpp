@@ -66,6 +66,10 @@ void WATING_CLIENT::receiveStart()
 
 void WATING_CLIENT::stringAnalysis(char* command)
 {
+	/// <summary>
+	/// 문자열 해석해서 맞는 함수 실행
+	/// </summary>
+	/// <param name="command">들어오는 문자열</param>
 	if (strcmp(command, "ST") == 0)
 	{
 		//ST: 게임시작 신호
@@ -79,6 +83,8 @@ void WATING_CLIENT::stringAnalysis(char* command)
 	else if (strncmp(command, "RD", 2) == 0)
 	{
 		//RD: 레디 신호
+		//RD0: 0번 플레이어 레디
+		//RD1: 1번 플레이어 레디 ...
 		receiveReady(command[2]);
 	}
 }

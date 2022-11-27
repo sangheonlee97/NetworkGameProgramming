@@ -21,7 +21,7 @@ public:
 	void receiveData(); //클라이언트 소켓버퍼 데이터 송신
 	void refuseEnter(SOCKET consock); // 입장거부 신호 송신(보내기)
 	void sendStart(); //게임시작 신호 송신
-	void stringAnalysis(char*); //받은 문자열 구문을 분석하여 목적에 맞는 함수 실행
+	void stringAnalysis(char* command); //받은 문자열 구문을 분석하여 목적에 맞는 함수 실행
 private:
 	int playerCount{ 0 }; //대기방 안의 클라이언트 플레이어 수
 	PlayerInfo player[3];

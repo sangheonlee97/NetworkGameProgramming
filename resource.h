@@ -34,7 +34,6 @@
 #define IDC_ADDIMGFILENAME              1011
 #define IDC_OBJTAG                      1012
 #define IDC_WAITINGROOM_ENTER_IP        1015
-#define IDOKWAITINGROOM_ENTER           1017
 #define IDOK_WAITINGROOM_ENTER          1017
 #define IDCANCEL_WAITINGROOM_ENTER      1018
 #define IDC_STATIC_WAITINGROOM_ENTER    1019

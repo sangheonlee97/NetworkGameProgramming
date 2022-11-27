@@ -167,10 +167,22 @@ void WATING_SERVER::sendStart()
 	//int retval = send(player[playerNum].GetSock(), "RJ", sizeof("RJ"), 0);
 }
 
-void WATING_SERVER::stringAnalysis(char*)
+void WATING_SERVER::stringAnalysis(char* command)
 {
 	/// <summary>
 	/// 받은 문자열 구문을 분석하여 목적에 맞는 함수 실행
 	/// </summary>
 	/// <param name="">해석할 문자열</param>
+	if (strncmp(command, "NN", 2) == 0)
+	{
+		//플레이어 닉네임 정하기
+		//NN0'이름': 0번 플레이어 이름 정하기 ...
+	}
+	else if (strncmp(command, "RD", 2) == 0)
+	{
+		//RD: 레디 신호
+		//RD0: 0번 플레이어 레디
+		//RD1: 1번 플레이어 레디 ...
+		receiveReady(command[2]);
+	}
 }

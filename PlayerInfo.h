@@ -9,6 +9,7 @@ public:
 	void SetNick(char* name);
 	bool GetIsReady();
 	void SetIsReady(bool ready);
+	SOCKET playerSock; //플레이어 소켓
 	SOCKET GetSock();
 	void SetSock(SOCKET sock);
 	void CloseSock();
@@ -17,6 +18,5 @@ public:
 private:
 	char* playerNickname; //플레이어 닉네임
 	bool playerIsReady; //플레이어 대기방 준비 여부
-	SOCKET playerSock; //플레이어 소켓
 	int playerNum; //플레이어 식별번호
 };
