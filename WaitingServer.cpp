@@ -185,7 +185,7 @@ void WATING_SERVER::sendStart()
 	{
 		retval = send(player[i].GetSock(), "ST", sizeof("ST"), 0);
 		if (retval == SOCKET_ERROR) {
-			printf("서버에서 게임시작 신호 송신 오류");
+			printf("서버에서 게임 시작 신호 송신 오류");
 			break;
 		}
 	}

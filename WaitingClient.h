@@ -17,6 +17,7 @@ public:
 	void receiveStart(); //[클라이언트] 게임시작 신호 수신
 	void stringAnalysis(char* command); //[클라이언트] 받은 문자열 구문을 분석하여 목적에 맞는 함수 실행
 	SOCKET serverSock; //서버 연결 소켓
+	void sendData(); //클라이언트 소켓버퍼 데이터 송신
 	
 private:
 	int playerCount{ 0 }; //대기방 안의 클라이언트 플레이어 수
