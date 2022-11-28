@@ -151,9 +151,6 @@ void WATING_SERVER::receiveReady(int playerNumber)
 	player[playerNumber].SetIsReady(player[playerNumber].GetIsReady() ? false : true); //true면 false, false면 true 변환.
 }
 
-void WATING_SERVER::sendData()
-{
-}
 
 void WATING_SERVER::receiveData()
 {

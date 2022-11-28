@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "PlayerInfo.h"
+#include "Player.h"
 
 PlayerInfo::PlayerInfo()
 {

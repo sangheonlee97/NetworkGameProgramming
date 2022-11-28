@@ -1,5 +1,7 @@
 #pragma once
 #include "stdafx.h"
+#include "Player.h"
+
 class PlayerInfo
 {
 public:
@@ -14,7 +16,7 @@ public:
 	void SetSock(SOCKET sock);
 	void CloseSock();
 	int GetNum();
-	void SetNum(int num); 
+	void SetNum(int num);
 private:
 	char* playerNickname; //플레이어 닉네임
 	bool playerIsReady; //플레이어 대기방 준비 여부

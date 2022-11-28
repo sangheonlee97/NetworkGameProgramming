@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "IngameServer.h"
 #include "GameFrame.h"
-DWORD WINAPI ingameServerReceiveThread(LPVOID lpParam)
+DWORD WINAPI inGameServerReceiveThread(LPVOID lpParam)
 {
 	/// <summary>
 	/// 인게임에서 서버가 클라이언트로부터 메시지 받는 쓰레드
@@ -36,6 +36,27 @@ DWORD WINAPI ingameServerReceiveThread(LPVOID lpParam)
 		IS.stringAnalysis(rcrBuf);
 	}
 }
+
+DWORD WINAPI inGameDataProcessingThread(LPVOID lpParam) // 클라이언트에게 전달받은 정보를 적용하는 쓰레드
+{
+	int sockPlayerNum = (int)lpParam; //이 스레드에서 연결중인 클라이언트의 번호
+	int retval; //받기 리턴 값
+	char rcrBuf[2048]; //고정길이
+	int rcrLen; // 고정 길이 데이터
+
+	INGAME_SERVER* ppNetInfo = (INGAME_SERVER*)lpParam;
+
+	ppNetInfo->receivePress();
+	ppNetInfo->stringAnalysis(rcrBuf);
+	ppNetInfo->inputManagement();
+	ppNetInfo->objectInteract();
+}
+
+DWORD WINAPI inGameServerSendThread(LPVOID lpParam) // 데이터 처리를 끝낸후 클라이언트로 전달하는 쓰레드
+{
+	
+}
+
 void INGAME_SERVER::receivePress()
 {
 }
@@ -55,6 +76,7 @@ void INGAME_SERVER::sendState()
 	/// </summary>
 	
 }
+
 
 void INGAME_SERVER::Render()
 {
@@ -90,4 +112,14 @@ PlayerInfo INGAME_SERVER::getPlayer(int num)
 	/// <param name="num">그 플레이어의 번호</param>
 	/// <returns></returns>
 	return player[num];
+}
+
+void INGAME_SERVER::setPlayerCount(int n)
+{
+	playerCount = n;
+}
+
+int INGAME_SERVER::getPlayerCount()
+{
+	return this->playerCount;
 }
