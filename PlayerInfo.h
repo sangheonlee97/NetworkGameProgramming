@@ -17,6 +17,7 @@ public:
 	void CloseSock();
 	int GetNum();
 	void SetNum(int num);
+	char* temp;
 private:
 	char* playerNickname; //플레이어 닉네임
 	bool playerIsReady; //플레이어 대기방 준비 여부

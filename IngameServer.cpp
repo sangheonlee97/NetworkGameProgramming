@@ -33,7 +33,8 @@ DWORD WINAPI inGameServerReceiveThread(LPVOID lpParam)
 		else if (retval == 0)
 			break;
 
-		IS.stringAnalysis(rcrBuf);
+		//IS.stringAnalysis(rcrBuf);
+		IS.receivePress(rcrBuf);
 	}
 }
 
@@ -46,7 +47,7 @@ DWORD WINAPI inGameDataProcessingThread(LPVOID lpParam) // 클라이언트에게 전달받
 
 	INGAME_SERVER* ppNetInfo = (INGAME_SERVER*)lpParam;
 
-	ppNetInfo->receivePress();
+	
 	ppNetInfo->stringAnalysis(rcrBuf);
 	ppNetInfo->inputManagement();
 	ppNetInfo->objectInteract();
@@ -57,8 +58,9 @@ DWORD WINAPI inGameServerSendThread(LPVOID lpParam) // 데이터 처리를 끝낸후 클라
 	
 }
 
-void INGAME_SERVER::receivePress()
+void INGAME_SERVER::receivePress(char* command)
 {
+	strcpy(player[player->GetNum()].temp, command);
 }
 
 void INGAME_SERVER::inputManagement()
