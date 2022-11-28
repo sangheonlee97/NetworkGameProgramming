@@ -11,6 +11,7 @@ DWORD WINAPI roomClientReceiveThread(LPVOID lpParam)
 	/// </summary>
 	/// <returns></returns>
 	WATING_CLIENT WC;
+	WC.serverSock = (SOCKET)lpParam;
 	int retval; //받기 리턴 값
 	char rcrBuf[2048]; //고정길이
 	int rcrLen; // 고정 길이 데이터

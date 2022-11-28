@@ -17,6 +17,7 @@ public:
 	bool checkJoin(HANDLE handle); //정상적인 접속인지 검사
 	void pressStart(); // 방장이 게임 시작 시도
 	void receiveReady(int playerNumber); //클라이언트가 ready
+	void sendData();
 	void receiveData(); //클라이언트 소켓버퍼 데이터 수신
 	void refuseEnter(SOCKET consock); // 입장거부 신호 송신(보내기)
 	void sendStart(); //게임시작 신호 송신
